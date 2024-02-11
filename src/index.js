@@ -1,17 +1,18 @@
-import dotenv from "dotenv";
+// importing libraries
+import dotenv from "dotenv";    
 import connectDB from "./db/index.js";
 
-dotenv.config({
-    path: "./.env"
+dotenv.config({     // configure dotenv
+    path: "./.env"  // set path of env
 });
 
-connectDB()
-.then(() => {
+connectDB()     // connecting to DB
+.then(() => {   // if successful connection established then start the PORT
     app.listen(process.env.PORT || 8000, () => {
         console.log("Server is running on Port: ", process.env.PORT);
     });
 })
-.catch((error) => {
+.catch((error) => { // Error
     console.log("MongoDB Connection Failed!!  ", error);
 })
     

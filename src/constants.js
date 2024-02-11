@@ -1,1 +1,1 @@
-export const DB_NAME = 'backend-chai';
+export const DB_NAME = 'backend-chai'; // DB name to use throughout the codebase

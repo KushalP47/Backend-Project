@@ -1,3 +1,4 @@
+// Standardizing the API error messages, so that every error gets in same format, helps in debugging and maintaining consistency
 class ApiError extends Error {
     constructor(
         statusCode,
