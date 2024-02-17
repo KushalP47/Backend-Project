@@ -14,4 +14,14 @@ app.use(express.static("public")); // it is a addres folder, where we will keep 
 
 app.use(cookieParser());
 
+
+// import router
+import userRouter from "./routes/user.routes.js";
+
+
+// declareing routes
+app.use("/api/v1/users", userRouter);
+
+// http://localhost:8000/api/v1/users/register
+
 export { app };

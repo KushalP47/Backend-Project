@@ -1,7 +1,7 @@
 // importing libraries
 import dotenv from "dotenv";    
 import connectDB from "./db/index.js";
-
+import { app } from "./app.js";
 dotenv.config({     // configure dotenv
     path: "./.env"  // set path of env
 });
@@ -13,6 +13,6 @@ connectDB()     // connecting to DB
     });
 })
 .catch((error) => { // Error
-    console.log("MongoDB Connection Failed!!  ", error);
+    console.log("Connection Failed!!  ", error);
 })
     
