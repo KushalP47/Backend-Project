@@ -1,11 +1,12 @@
 // importing libraries
-import dotenv from "dotenv";    
-import connectDB from "./db/index.js";
-import { app } from "./app.js";
-console.log("Hello ");
+import dotenv from "dotenv";   
 dotenv.config({     // configure dotenv
     path: "./.env"  // set path of env
-});
+}); 
+import connectDB from "./db/index.js";
+import { app } from "./app.js";
+
+// console.log(process.env.MONGODB_URI);
 
 connectDB()     // connecting to DB
 .then(() => {   // if successful connection established then start the PORT
