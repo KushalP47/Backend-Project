@@ -26,7 +26,7 @@ const fileUpload = async(localFilePath) => {
             resource_type: "auto",
         });
         // file has been uploaded successfully
-        console.log("File has been uploaded successfully!!", response.url);
+        // console.log("File has been uploaded successfully!!", response.url);
         return response;
     } catch (error) {
         // console.log(error);
