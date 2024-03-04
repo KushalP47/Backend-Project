@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";    // cross origin resource sharing
 import cookieParser from "cookie-parser"; // middleware used in parsing cookies
+import bodyParser from "body-parser";
+
+
 
 const app = express();
 
@@ -13,7 +16,7 @@ app.use(express.urlencoded({extended: true, limit: "16kb"})) // with extended fl
 app.use(express.static("public")); // it is a addres folder, where we will keep files which we want to keep in public
 
 app.use(cookieParser());
-
+app.use(bodyParser.json());
 
 // import router
 import userRouter from "./routes/user.routes.js";
