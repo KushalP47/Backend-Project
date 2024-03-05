@@ -220,4 +220,59 @@ const refreshAccessToken = asyncHandler( async(req, res) => {
 
 });
 
-export { registerUser, loginUser, logoutUser, refreshAccessToken };
+const changeCurrentPassword = asyncHandler( async(req, res) => {
+    const {oldPassword, newPassword} = req.body;
+    if(!oldPassword || !newPassword){
+        throw new ApiError(400, "All fields are required!!");
+    }
+
+    const isPasswordValid = await req.user.isPasswordCorrect(oldPassword);
+    if(!isPasswordValid){
+        throw new ApiError(400, "Old Password is incorrect!!");
+    }
+
+    if(oldPassword === newPassword){
+        throw new ApiError(400, "New Password cannot be same as old password!!");
+    }
+
+    const user = await User.findById(req.user._id);
+    user.password = newPassword;
+    await user.save({validateBeforeSave: false});
+
+    return res.status(200)
+    .json(
+        new ApiResponse(200, {}, "Password changed successfully!!")
+    )
+});
+
+const getUserProfile = asyncHandler( async(req, res) => {
+    return res.status(200)
+    .json(
+        new ApiResponse(200, req.user, "User profile fetched successfully!!")
+    )   
+});
+
+const updateProfile = asyncHandler( async(req, res) => {
+    const { fullName, userName, email } = req.body;
+    if([fullName, userName, email].some((val) => val?.trim === "")){
+        throw new ApiError(400, "All fields are required!!");
+    }
+
+    const user = await User.findByIdAndUpdate(req.user._id,{
+        fullName,
+        userName,
+        email,
+    }, {new: true}
+    );
+    if(!user){
+        throw new ApiError(500, "Something went wrong while updating the user profile");
+    }
+    return res.status(200)
+    .json(
+        new ApiResponse(200, user, "User profile updated successfully!!")
+    )   
+});
+
+
+
+export { registerUser, loginUser, logoutUser, refreshAccessToken, changeCurrentPassword, getUserProfile, updateProfile };
